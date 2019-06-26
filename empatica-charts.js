@@ -38,12 +38,9 @@ const chart = new Chart(ctx, {
     },
     layout: {
       padding: {
+        top: 50,
         right: 20
       }
-    },
-    title: {
-      display: true,
-      text: `Day: ${day + 1} Total: ${days[day].length}`
     },
     scales: {
       xAxes: [{
@@ -75,36 +72,34 @@ const chart = new Chart(ctx, {
   }
 });
 
-window.addEventListener('keyup', e => {
-  if (e.keyCode === 82) {
-    chart.resetZoom();
-  }
-  if (e.keyCode === 76) {
-    if (chart.data.datasets[0].showLine) {
-      chart.data.datasets[0].showLine = false;
-      chart.data.datasets[0].pointRadius = 1;
-    } else {
-      chart.data.datasets[0].showLine = true;
-      chart.data.datasets[0].pointRadius = 0;
-    }
-    chart.update();
-  }
-  if (e.keyCode === 37 || e.keyCode === 39) {
-    if (e.keyCode === 37) {
-      if (day === 0) {
-        day = 7;
-      } else {
-        day--;
-      }
-    } else {
-      if (day === 7) {
-        day = 0;
-      } else {
-        day++;
-      }
-    }
+document.getElementById('change-day-text').innerText = `ay ${day + 1} (${days[day].length} items)`;
+const dropdown = document.getElementById('change-day');
+for (const d in days) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'dropdown-item';
+  button.setAttribute('data-value', d);
+  button.innerHTML = `Day ${+d + 1} (${days[d].length} items)`;
+  dropdown.appendChild(button);
+}
+document.querySelectorAll('.dropdown-item').forEach(e => {
+  e.addEventListener('click', function () {
+    document.getElementById('change-day-text').innerText = this.innerText.substring(1);
+    day = +this.dataset.value;
     chart.data.datasets[0].data = days[day];
-    chart.options.title.text = `Day: ${day + 1} Total: ${days[day].length}`;
     chart.update();
-  }
+  });
 });
+
+window.changeView = function () {
+  if (chart.data.datasets[0].showLine) {
+    chart.data.datasets[0].showLine = false;
+    chart.data.datasets[0].pointRadius = 1;
+    document.getElementById('change-view').innerHTML = 'Point';
+  } else {
+    chart.data.datasets[0].showLine = true;
+    chart.data.datasets[0].pointRadius = 0;
+    document.getElementById('change-view').innerHTML = 'Line';
+  }
+  chart.update();
+};
