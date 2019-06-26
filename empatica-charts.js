@@ -36,6 +36,11 @@ const chart = new Chart(ctx, {
     legend: {
       display: false
     },
+    layout: {
+      padding: {
+        right: 20
+      }
+    },
     title: {
       display: true,
       text: `Day: ${day + 1} Total: ${days[day].length}`
