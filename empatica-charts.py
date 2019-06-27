@@ -24,18 +24,16 @@ for x in files:
 
 date = days[0][0][0:10]
 day = 1
-f = open('./day' + str(day) + '.js', 'w+')
+f = open('./days.js', 'w+')
 f.write('const day' + str(day) + ' = [')
 
 for x in days:
   if not x[0][0:10] == date:
     date = x[0][0:10]
     day += 1
-    f.write('];')
-    f.close()
-    f = open('./day' + str(day) + '.js', 'w+')
+    f.write('];\n')
     f.write('const day' + str(day) + ' = [')
   f.write('{ x: new Date("%s"), y: %s },' % (x[0], x[1]))
 
-f.write('];')
+f.write('];\n')
 f.close()
