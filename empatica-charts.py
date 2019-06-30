@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 from datetime import datetime, timedelta
 
 def read_heart_rate(file_name):
@@ -15,12 +16,9 @@ def read_heart_rate(file_name):
 
 days = []
 
-files = ['./1556618502_A010C3/HR.csv', './1556692893_A01B22/HR.csv', './1556777808_A01B22/HR.csv', './1556865657_A01B22/HR.csv',
-'./1556891066_A01B22/HR.csv', './1556891443_A01B22/HR.csv', './1556895144_A01B22/HR.csv', './1556951136_A01B22/HR.csv',
-'./1557036348_A01B22/HR.csv', './1557121222_A01B22/HR.csv', './1557226001_A01B22/HR.csv']
-
-for x in files:
-  days += read_heart_rate(x)
+for e in sorted(os.listdir('data')):
+  if os.path.isdir(os.path.join('data', e)):
+    days += read_heart_rate(os.path.join('data', e, 'HR.csv'))
 
 date = days[0][0][0:10]
 day = 1
