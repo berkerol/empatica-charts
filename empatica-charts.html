@@ -22,20 +22,12 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha256-eVNjHw5UeU0jUqPPpZHAkU1z4U+QFBBY488WvueTm88=" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.0/dist/chartjs-plugin-zoom.min.js" integrity="sha256-a1Lz8gxLVQkMk+UOF1s5p+zPYcpTwczef8rojwhSIP0=" crossorigin="anonymous"></script>
+  <script defer src="https://berkerol.github.io/libraries/form.js"></script>
   <script defer src="days.js"></script>
   <script defer src="empatica-charts.js"></script>
 </head>
 
 <body>
-  <div class="btn-group btn-group-lg btn-group-center">
-    <button type="button" class="btn btn-info" onclick="changeView()" accesskey="v"><i class="fas fa-chart-line"></i> <u>V</u>iew: <span id="change-view">Point</span></button>
-    <div class="btn-group btn-group-lg">
-      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" accesskey="d"><i class="far fa-calendar-alt"></i> <u>D</u><span id="change-day-text"></span></button>
-      <div class="dropdown-menu" id="change-day">
-      </div>
-    </div>
-    <button type="button" class="btn btn-info" onclick="chart.resetZoom();" accesskey="r"><i class="fas fa-undo-alt"></i> <u>R</u>eset zoom</button>
-  </div>
   <canvas id="canvas">Your browser doesn't support HTML5.</canvas>
 </body>
 

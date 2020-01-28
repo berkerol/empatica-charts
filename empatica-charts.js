@@ -1,4 +1,4 @@
-/* global day1, day2, day3, day4, day5, day6, day7, day8, Chart */
+/* global day1, day2, day3, day4, day5, day6, day7, day8, Chart, createButton createDropdownRow */
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -72,16 +72,17 @@ const chart = new Chart(ctx, {
   }
 });
 
-document.getElementById('change-day-text').innerText = `ay ${day + 1} (${days[day].length} items)`;
-const dropdown = document.getElementById('change-day');
+const dropdownItems = [];
 for (const d in days) {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'dropdown-item';
-  button.setAttribute('data-value', d);
-  button.innerHTML = `Day ${+d + 1} (${days[d].length} items)`;
-  dropdown.appendChild(button);
+  dropdownItems.push([d, `Day ${+d + 1} (${days[d].length} items)`]);
 }
+const firstButtonElements = ['info', 'changeView()', 'v', 'chart-line', '<u>V</u>iew: <span id="change-view">Point</span>'];
+const dropdownElements = [[['info dropdown-toggle', '', 'd', 'calendar-alt', `<u>D</u><span id="change-day-text">ay ${day + 1} (${days[day].length} items)</span>`], 'change-day', dropdownItems]];
+const secondButtonElements = ['info', 'chart.resetZoom()', 'r', 'undo-alt', '<u>R</u>eset zoom'];
+const dropdownRow = createDropdownRow(dropdownElements);
+dropdownRow.insertBefore(createButton(...firstButtonElements), dropdownRow.children[0]);
+dropdownRow.appendChild(createButton(...secondButtonElements));
+document.body.insertBefore(dropdownRow, canvas);
 document.querySelectorAll('.dropdown-item').forEach(e => {
   e.addEventListener('click', function () {
     document.getElementById('change-day-text').innerText = this.innerText.substring(1);
