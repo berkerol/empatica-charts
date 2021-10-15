@@ -86,7 +86,7 @@ document.body.insertBefore(dropdownRow, canvas);
 document.querySelectorAll('.dropdown-item').forEach(e => {
   e.addEventListener('click', function () {
     document.getElementById('change-day-text').innerText = this.innerText.substring(1);
-    day = +this.dataset.value;
+    day = +this.dataset.bsValue;
     chart.data.datasets[0].data = days[day];
     chart.update();
   });
